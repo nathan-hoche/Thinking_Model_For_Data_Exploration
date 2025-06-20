@@ -3,8 +3,9 @@ from colorama import Fore
 import re
 
 class LLMHandler:
-    def __init__(self, model_name: str):
+    def __init__(self, model_name:str, verbose:bool=False):
         self.model = model_name
+        self.verbose = verbose
 
     def get_history(self, query:str, system_prompt:str=None, history:list=None) -> list:
         res = [{'role': 'system_prompt', 'content': system_prompt}] if system_prompt else []
@@ -18,14 +19,15 @@ class LLMHandler:
         stream = chat(
             model=self.model,
             messages=self.get_history(query, system_prompt, history),
-            tools=tools,  # List your tool functions here
+            tools=tools,
             stream=True
         )
 
         res = ""
         print(Fore.LIGHTBLACK_EX, end='')
         for chunk in stream:
-            print(chunk.message.content, end='', flush=True)
+            if self.verbose:
+                print(chunk.message.content, end='', flush=True)
             res += chunk.message.content
             if chunk.message.tool_calls:
                 print(Fore.YELLOW + chunk.message.tool_calls + Fore.LIGHTBLACK_EX, end='')
