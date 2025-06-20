@@ -3,11 +3,11 @@ import json
 from dataset_interaction import DatasetInteraction
 
 class Processor:
-    def __init__(self, folder_path):
+    def __init__(self):
         with open('config/config.json', 'r') as file:
             self.config = json.load(file)
         
-        self.di = DatasetInteraction(folder_path=self.config['dataset_path'])
+        self.di = DatasetInteraction(dataset_path=self.config['dataset_path'])
 
     def process(self):
         print("Processing datasets...")
@@ -15,7 +15,7 @@ class Processor:
             print(f"Processing {csv_file} with {len(df)} rows and {len(df.columns)} columns.")
 
 if __name__ == "__main__":
-    processor = Processor(folder_path='../data')
+    processor = Processor()
     processor.process()
     print("Processing complete.")
     
