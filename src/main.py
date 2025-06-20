@@ -18,10 +18,16 @@ class Processor:
         print("Processing datasets...")
         for csv_file, df in self.di.dataframes.items():
             print(f"Processing {csv_file} ({len(df)} rows X {len(df.columns)} columns)")
-            #self.llm_handler.ask("Hello how are you?")
+
+            
+            res = self.llm_handler.ask(
+                query=f"Make a description of this dataset: {csv_file}, which has {len(df)} rows and {len(df.columns)} columns. The different columns names are {', '.join(df.columns.tolist())}.",
+            )
+
+            print(f"Description for {csv_file}:\n{res}\n")
+            break
 
 if __name__ == "__main__":
     processor = Processor()
     processor.process()
-    print("Processing complete.")
     
