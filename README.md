@@ -25,13 +25,11 @@ python main.py [-h] --datapath DATAPATH [--model MODEL] [--verbose VERBOSE]
 
 ```
 
-options:
-  -h, --help           show this help message and exit
-  --datapath DATAPATH  Path to the data (required).
-  --model MODEL        Name or path of the model (optional).
-  --verbose VERBOSE    Visualise LLM streaming response
-
-
+options: <br>
+  -h, --help           show this help message and exit <br>
+  --datapath DATAPATH  Path to the data (required). <br>
+  --model MODEL        Name or path of the model (optional). <br>
+  --verbose VERBOSE    Visualise LLM streaming response <br>
 
 > [!NOTE]
 > The datapath is displayed at the end of the download script, so you can copy it and paste it in the command line.
