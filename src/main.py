@@ -1,14 +1,21 @@
-import pandas as pd
-import os
+import json
 
-FOLDER_PATH = "/home/Yukiche/.cache/kagglehub/datasets/kendallgillies/nflstatistics/versions/1"
+from dataset_interaction import DatasetInteraction
 
-for csv_file in os.listdir(FOLDER_PATH):
-    if csv_file.endswith('.csv'):
-        print(f"Processing CSV file: {csv_file}")
+class Processor:
+    def __init__(self, folder_path):
+        with open('config/config.json', 'r') as file:
+            self.config = json.load(file)
+        
+        self.di = DatasetInteraction(folder_path=self.config['dataset_path'])
 
-        # Replace with the correct path to your CSV file
-        df = pd.read_csv(f"{FOLDER_PATH}/{csv_file}")
+    def process(self):
+        print("Processing datasets...")
+        for csv_file, df in self.di.dataframes.items():
+            print(f"Processing {csv_file} with {len(df)} rows and {len(df.columns)} columns.")
 
-        # Display the first five rows
-        print(df.head())
+if __name__ == "__main__":
+    processor = Processor(folder_path='../data')
+    processor.process()
+    print("Processing complete.")
+    
