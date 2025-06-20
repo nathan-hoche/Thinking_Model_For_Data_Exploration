@@ -8,9 +8,7 @@ init()
 from dataset_interaction import DatasetInteraction
 from llm_handler import LLMHandler
 
-
 os.makedirs('out', exist_ok=True)
-
 
 class Processor:
     def __init__(self, verbose:bool=False):
