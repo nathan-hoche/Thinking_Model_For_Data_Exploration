@@ -51,7 +51,7 @@ This project will generate a very basic summary of the data, containing the foll
 - **Proposed Studies**: A list of potential studies that can be conducted with the dataset, including a brief description of each study.
 - **Visualization**: A step-by-step approach to visualize the data using Python libraries like `pandas` and `matplotlib`.
 
-> You can view the generated summaries in the `docs` folder. ![Example 1](docs/Basic_Stats.csv.md) & ![Example 2](docs/Career_Stats_Defensive.csv.md)
+> You can view the generated summaries in the `docs` folder. [Example 1](docs/Basic_Stats.csv.md) & [Example 2](docs/Career_Stats_Defensive.csv.md)
 
 
 > [!NOTE]
