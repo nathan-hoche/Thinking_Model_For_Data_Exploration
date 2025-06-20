@@ -2,6 +2,7 @@ import json
 from colorama import init
 import os
 from tqdm import tqdm
+import argparse
 
 init()
 
@@ -11,12 +12,10 @@ from llm_handler import LLMHandler
 os.makedirs('out', exist_ok=True)
 
 class Processor:
-    def __init__(self, verbose:bool=False):
-        with open('config/config.json', 'r') as file:
-            self.config = json.load(file)
+    def __init__(self, config: argparse.Namespace):
         
-        self.di = DatasetInteraction(dataset_path=self.config['dataset_path'])
-        self.llm_handler = LLMHandler(model_name=self.config['model'], verbose=verbose)
+        self.di = DatasetInteraction(dataset_path=config.datapath)
+        self.llm_handler = LLMHandler(model_name=config.model, verbose=config.verbose)
 
 
     def process(self):
@@ -39,6 +38,14 @@ class Processor:
 
 
 if __name__ == "__main__":
-    processor = Processor(verbose=False)
+    parser = argparse.ArgumentParser(description='Process datasets and generate insights using a language model.')
+
+    parser.add_argument('--datapath', type=str, required=True, help='Path to the data (required).')
+    parser.add_argument('--model', type=str, help='Name or path of the model (optional).', default='qwen3:0.6b')
+    parser.add_argument('--verbose', type=bool, help='Visualise LLM streaming response', default=False)
+
+    args = parser.parse_args()
+
+    processor = Processor(config=args)
     processor.process()
     
